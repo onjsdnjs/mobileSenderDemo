@@ -36,8 +36,8 @@ public class MobileSenderRegistrar implements ImportBeanDefinitionRegistrar, Res
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry, BeanNameGenerator importBeanNameGenerator) {
         MobileSenderConfigurationSource mobileSenderConfigurationSource = new MobileSenderConfigurationSource(registry, importingClassMetadata, MobileSenderRegistrar.getAnnotation(), importBeanNameGenerator, resourceLoader);
-        MobileSenderConfigurationExecutor mobileSenderConfigurationExecutor = new MobileSenderConfigurationExecutor(registry, mobileSenderConfigurationSource);
-        mobileSenderConfigurationExecutor.getMobileSenderConfigurations(resourceLoader);
+        MobileSenderConfigurationDelegate mobileSenderConfigurationDelegate = new MobileSenderConfigurationDelegate(registry, mobileSenderConfigurationSource);
+        mobileSenderConfigurationDelegate.getMobileSenderConfigurations(resourceLoader);
     }
 
     @Override

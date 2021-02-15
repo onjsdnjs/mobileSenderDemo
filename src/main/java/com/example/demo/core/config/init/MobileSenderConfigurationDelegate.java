@@ -10,14 +10,14 @@ import org.springframework.util.StopWatch;
 
 import java.util.*;
 
-public class MobileSenderConfigurationExecutor {
+public class MobileSenderConfigurationDelegate {
 
     static final String FACTORY_BEAN_OBJECT_TYPE = "factoryBeanObjectType";
 
     private BeanDefinitionRegistry registry;
     private MobileSenderConfigurationSource mobileSenderConfigurationSource;
 
-    public MobileSenderConfigurationExecutor(BeanDefinitionRegistry registry, MobileSenderConfigurationSource mobileSenderConfigurationSource) {
+    public MobileSenderConfigurationDelegate(BeanDefinitionRegistry registry, MobileSenderConfigurationSource mobileSenderConfigurationSource) {
         this.registry = registry;
         this.mobileSenderConfigurationSource = mobileSenderConfigurationSource;
     }
