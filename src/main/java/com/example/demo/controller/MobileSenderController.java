@@ -30,10 +30,10 @@ public class MobileSenderController {
 
         System.out.println("=========================================");
 
-        /*kakaoMobileSender.send(new KakaoMobileRequest());
+        kakaoMobileSender.send(new KakaoMobileRequest());
         KakaoMobileResponse receive1 = kakaoMobileSender.receive(new KakaoMobileResponse(3L));
         System.out.println("receive.getId: " + receive1.getId());
-        System.out.println("");*/
+        System.out.println("");
 
         naverMobileSender.send(new NaverMobileRequest());
         NaverMobileResponse receive2 = naverMobileSender.receive(new NaverMobileResponse(4L));
