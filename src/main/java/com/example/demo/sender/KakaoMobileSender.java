@@ -5,5 +5,5 @@ import com.example.demo.core.sender.MobileSender;
 import com.example.demo.dto.KakaoMobileRequest;
 import com.example.demo.dto.KakaoMobileResponse;
 
-@NoMobileSenderBean
+//@NoMobileSenderBean
 public interface KakaoMobileSender extends MobileSender<KakaoMobileRequest, KakaoMobileResponse> { }
