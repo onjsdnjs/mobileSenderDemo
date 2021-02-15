@@ -29,8 +29,6 @@ public @interface EnableMobileSender {
 
     Class<?> mobileSenderBaseClass() default DefaultMobileSenderBaseClass.class;
 
-    String entityManagerFactoryRef() default "entityManagerFactory";
-
     String transactionManagerRef() default "transactionManager";
 
     boolean enableDefaultTransactions() default true;
