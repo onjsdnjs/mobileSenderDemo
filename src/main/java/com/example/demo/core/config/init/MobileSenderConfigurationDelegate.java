@@ -1,6 +1,6 @@
 package com.example.demo.core.config.init;
 
-import com.example.demo.core.config.build.MobileSenderBeanDefinitionBuilder;
+import com.example.demo.core.config.builder.MobileSenderBeanDefinitionBuilder;
 import org.springframework.beans.factory.parsing.BeanComponentDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;

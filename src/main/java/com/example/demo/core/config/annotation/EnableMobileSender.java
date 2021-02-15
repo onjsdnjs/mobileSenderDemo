@@ -1,6 +1,6 @@
 package com.example.demo.core.config.annotation;
 
-import com.example.demo.core.config.build.DefaultMobileSenderBaseClass;
+import com.example.demo.core.config.builder.DefaultMobileSenderBaseClass;
 import com.example.demo.core.config.init.MobileSenderRegistrar;
 import com.example.demo.core.factory.MobileSenderFactoryBean;
 import org.springframework.context.annotation.ComponentScan;

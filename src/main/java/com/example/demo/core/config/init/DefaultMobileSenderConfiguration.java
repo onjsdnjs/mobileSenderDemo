@@ -1,6 +1,6 @@
 package com.example.demo.core.config.init;
 
-import com.example.demo.core.config.build.MobileSenderBeanNameGenerator;
+import com.example.demo.core.config.builder.MobileSenderBeanNameGenerator;
 import com.example.demo.core.factory.MobileSenderFactoryBean;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;

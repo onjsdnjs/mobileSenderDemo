@@ -1,8 +1,8 @@
 package com.example.demo.core.config.init;
 
-import com.example.demo.core.config.build.DefaultMobileSenderBaseClass;
-import com.example.demo.core.config.build.MobileSenderBeanNameGenerator;
-import com.example.demo.core.config.build.MobileSenderComponentProvider;
+import com.example.demo.core.config.builder.DefaultMobileSenderBaseClass;
+import com.example.demo.core.config.builder.MobileSenderBeanNameGenerator;
+import com.example.demo.core.config.builder.MobileSenderComponentProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
