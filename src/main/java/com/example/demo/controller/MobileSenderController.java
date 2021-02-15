@@ -40,6 +40,5 @@ public class MobileSenderController {
         KtMobileResponse receive3 = ktMobileSender.receive(new KtMobileResponse(5L));
         System.out.println("receive.getId: " + receive3.getId());
         System.out.println("=========================================");
-        System.out.println("");
     }
 }

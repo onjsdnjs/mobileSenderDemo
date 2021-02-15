@@ -1,11 +1,11 @@
 package com.example.demo.core.config.init;
 
 import com.example.demo.core.config.build.MobileSenderBeanNameGenerator;
-import com.example.demo.core.config.init.MobileSenderConfigurationSource;
 import com.example.demo.core.factory.MobileSenderFactoryBean;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.data.config.ConfigurationUtils;
+
 import java.util.Optional;
 
 public class DefaultMobileSenderConfiguration {

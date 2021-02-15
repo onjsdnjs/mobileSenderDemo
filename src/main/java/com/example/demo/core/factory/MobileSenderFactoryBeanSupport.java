@@ -9,7 +9,6 @@ import org.springframework.aop.interceptor.ExposeInvocationInterceptor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor;
-import org.springframework.data.repository.Repository;
 import org.springframework.data.util.Lazy;
 import org.springframework.data.util.ReflectionUtils;
 import org.springframework.stereotype.Component;

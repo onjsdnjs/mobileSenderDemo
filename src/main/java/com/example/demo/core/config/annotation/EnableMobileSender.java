@@ -1,12 +1,10 @@
 package com.example.demo.core.config.annotation;
 
-//import com.example.demo.core.factory.MobileSenderFactoryBean;
 import com.example.demo.core.config.build.DefaultMobileSenderBaseClass;
 import com.example.demo.core.config.init.MobileSenderRegistrar;
 import com.example.demo.core.factory.MobileSenderFactoryBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
-import org.springframework.data.repository.config.BootstrapMode;
 
 import java.lang.annotation.*;
 
@@ -36,8 +34,6 @@ public @interface EnableMobileSender {
     String transactionManagerRef() default "transactionManager";
 
     boolean enableDefaultTransactions() default true;
-
-    BootstrapMode bootstrapMode() default BootstrapMode.DEFAULT;
 
     char escapeCharacter() default '\\';
 }

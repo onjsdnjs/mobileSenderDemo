@@ -3,7 +3,6 @@ package com.example.demo.core.config.init;
 import com.example.demo.core.config.build.DefaultMobileSenderBaseClass;
 import com.example.demo.core.config.build.MobileSenderBeanNameGenerator;
 import com.example.demo.core.config.build.MobileSenderComponentProvider;
-import com.example.demo.core.sender.MobileSender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -14,9 +13,6 @@ import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.filter.TypeFilter;
-import org.springframework.data.repository.core.RepositoryMetadata;
-import org.springframework.data.repository.core.support.AnnotationRepositoryMetadata;
-import org.springframework.data.repository.core.support.DefaultRepositoryMetadata;
 import org.springframework.data.util.Streamable;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
@@ -61,7 +57,6 @@ public class MobileSenderConfigurationSource {
                 continue;
             }
 
-//            RepositoryMetadata metadata = getMetadata(mobileSenderInterface);
             result.add(configuration);
         }
 
@@ -71,14 +66,6 @@ public class MobileSenderConfigurationSource {
     protected DefaultMobileSenderConfiguration getMobileSenderConfiguration(BeanDefinition definition, MobileSenderConfigurationSource configSource) {
         return new DefaultMobileSenderConfiguration(definition, configSource,
                 new MobileSenderBeanNameGenerator(resourceLoader.getClassLoader(),importBeanNameGenerator, registry));
-    }
-
-    public static RepositoryMetadata getMetadata(Class<?> mobileSenderInterface) {
-
-        Assert.notNull(mobileSenderInterface, "MobileSender interface must not be null!");
-
-        return MobileSender.class.isAssignableFrom(mobileSenderInterface) ? new DefaultRepositoryMetadata(mobileSenderInterface)
-                : new AnnotationRepositoryMetadata(mobileSenderInterface);
     }
 
     private Class<?> loadMobileSenderInterface(DefaultMobileSenderConfiguration configuration, @Nullable ClassLoader classLoader) {
