@@ -1,12 +1,11 @@
 package com.example.demo;
 
-import com.example.demo.config.EnableMobileSender;
+import com.example.demo.core.config.annotation.EnableMobileSender;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories
+//@EnableJpaRepositories
 @EnableMobileSender
 public class DemoApplication {
 

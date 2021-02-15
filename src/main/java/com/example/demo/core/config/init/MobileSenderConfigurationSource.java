@@ -1,13 +1,19 @@
-package com.example.demo.config;
+package com.example.demo.core.config.init;
 
+import com.example.demo.core.config.build.DefaultMobileSenderBaseClass;
+import com.example.demo.core.config.build.MobileSenderBeanNameGenerator;
+import com.example.demo.core.config.build.MobileSenderComponentProvider;
+import com.example.demo.core.sender.MobileSender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
+import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.filter.TypeFilter;
-import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.core.support.AnnotationRepositoryMetadata;
 import org.springframework.data.repository.core.support.DefaultRepositoryMetadata;
@@ -15,21 +21,31 @@ import org.springframework.data.util.Streamable;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.lang.annotation.Annotation;
+import java.util.*;
 
 @Slf4j
 public class MobileSenderConfigurationSource {
 
-    private BeanFactory registry;
+    private static final String MOBILE_SENDER_FACTORY_BEAN_CLASS = "mobileSenderFactoryBeanClass";
+    private static final String MOBILE_SENDER_BASE_CLASS = "mobileSenderBaseClass";
+    private final AnnotationMetadata metadata;
+    private BeanDefinitionRegistry registry;
+    private final AnnotationAttributes attributes;
+    private BeanNameGenerator importBeanNameGenerator;
+    private ResourceLoader resourceLoader;
 
-    public MobileSenderConfigurationSource(BeanFactory registry) {
+    public MobileSenderConfigurationSource(BeanDefinitionRegistry registry, AnnotationMetadata metadata, Class<? extends Annotation> annotation,
+                                           BeanNameGenerator importBeanNameGenerator, ResourceLoader resourceLoader) {
+        Map<String, Object> annotationAttributes = metadata.getAnnotationAttributes(annotation.getName());
+        this.metadata = metadata;
+        this.resourceLoader = resourceLoader;
+        this.importBeanNameGenerator = importBeanNameGenerator;
         this.registry = registry;
+        this.attributes = new AnnotationAttributes(annotationAttributes);
     }
 
-    public Collection<DefaultMobileSenderConfiguration> getMobileSenderConfigurations(ResourceLoader loader) {
+    public Collection<DefaultMobileSenderConfiguration> getMobileSenderConfigurations(ResourceLoader loader, MobileSenderConfigurationSource mobileSenderConfigurationSource) {
 
         Assert.notNull(loader, "Loader must not be null!");
 
@@ -37,7 +53,7 @@ public class MobileSenderConfigurationSource {
 
         for (BeanDefinition candidate : getCandidates(loader)) {
 
-            DefaultMobileSenderConfiguration configuration = getMobileSenderConfiguration(candidate);
+            DefaultMobileSenderConfiguration configuration = getMobileSenderConfiguration(candidate, mobileSenderConfigurationSource);
             Class<?> mobileSenderInterface = loadMobileSenderInterface(configuration, getConfigurationInspectionClassLoader(loader));
 
             if (mobileSenderInterface == null) {
@@ -52,16 +68,17 @@ public class MobileSenderConfigurationSource {
         return result;
     }
 
+    protected DefaultMobileSenderConfiguration getMobileSenderConfiguration(BeanDefinition definition, MobileSenderConfigurationSource configSource) {
+        return new DefaultMobileSenderConfiguration(definition, configSource,
+                new MobileSenderBeanNameGenerator(resourceLoader.getClassLoader(),importBeanNameGenerator, registry));
+    }
+
     public static RepositoryMetadata getMetadata(Class<?> mobileSenderInterface) {
 
         Assert.notNull(mobileSenderInterface, "MobileSender interface must not be null!");
 
         return MobileSender.class.isAssignableFrom(mobileSenderInterface) ? new DefaultRepositoryMetadata(mobileSenderInterface)
                 : new AnnotationRepositoryMetadata(mobileSenderInterface);
-    }
-
-    protected DefaultMobileSenderConfiguration getMobileSenderConfiguration(BeanDefinition definition) {
-        return new DefaultMobileSenderConfiguration(definition);
     }
 
     private Class<?> loadMobileSenderInterface(DefaultMobileSenderConfiguration configuration, @Nullable ClassLoader classLoader) {
@@ -101,7 +118,26 @@ public class MobileSenderConfigurationSource {
     }
 
     protected Streamable<String> getBasePackages() {
-        return Streamable.of(AutoConfigurationPackages.get(this.registry));
+        return Streamable.of(AutoConfigurationPackages.get((BeanFactory) this.registry));
     }
 
+    public Optional<String> getMobileSenderBaseClassName() {
+
+        if (!attributes.containsKey(MOBILE_SENDER_BASE_CLASS)) {
+            return Optional.empty();
+        }
+
+        Class<? extends Object> mobileSenderBaseClass = attributes.getClass(MOBILE_SENDER_BASE_CLASS);
+        return DefaultMobileSenderBaseClass.class.equals(mobileSenderBaseClass) ? Optional.empty()
+                : Optional.of(mobileSenderBaseClass.getName());
+    }
+
+
+    public Optional<Object> getMobileSenderFactoryBeanClassName() {
+        return Optional.of(attributes.getClass(MOBILE_SENDER_FACTORY_BEAN_CLASS).getName());
+    }
+
+    public Object getSource() {
+        return metadata;
+    }
 }
