@@ -4,6 +4,7 @@ import com.example.demo.core.config.build.DefaultMobileSenderBaseClass;
 import com.example.demo.core.config.init.MobileSenderRegistrar;
 import com.example.demo.core.factory.MobileSenderFactoryBean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -13,6 +14,7 @@ import java.lang.annotation.*;
 @Documented
 @Inherited
 @Import(MobileSenderRegistrar.class)
+@Configuration
 public @interface EnableMobileSender {
 
     String[] value() default {};
