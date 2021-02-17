@@ -8,5 +8,5 @@
 * SomeInterface extends MobileSender, CustomInterface
 
 ### 1.3. AOP 및 Reflection 기술을 최대한 활용함
-* ProxyFactory, reflect, MethodInterceptor, JdkDynamicAopProxy, CGLib 등..
-* Spring Data Jpa 소스를 분석하여 참조 
+* ProxyFactory, reflect, MethodInterceptor, JdkDynamicAopProxy, CGLib 등
+* Spring Data Jpa 소스를 분석하여 참조
