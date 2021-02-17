@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface MicroServiceMobileSender {
 
-    List<String> getServerNames();
+    List<String> getServerNames(String ip);
 
 }
