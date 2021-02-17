@@ -2,9 +2,9 @@ package io.anymobi.sender.core.exception;
 
 import org.springframework.aop.AopInvocationException;
 
-public class NotFoundCustomMethodException extends AopInvocationException {
+public class CustomMethodInvokeException extends AopInvocationException {
 
-    public NotFoundCustomMethodException(Throwable e) {
+    public CustomMethodInvokeException(Throwable e) {
         super(e.getMessage());
     }
 }

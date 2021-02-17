@@ -1,6 +1,6 @@
 package io.anymobi.sender.core.interceptor;
 
-import io.anymobi.sender.core.exception.NotFoundCustomMethodException;
+import io.anymobi.sender.core.exception.CustomMethodInvokeException;
 import io.anymobi.sender.core.sender.MobileSender;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -56,7 +56,7 @@ public class CustomDynamicServiceInterceptor implements MethodInterceptor, Seria
                 }
             }
 
-            throw new NotFoundCustomMethodException(e);
+            throw new CustomMethodInvokeException(e);
         }
     }
 }
