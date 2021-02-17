@@ -2,7 +2,6 @@ package com.example.demo.core.interceptor;
 
 import com.example.demo.core.exception.NotFoundCustomMethodException;
 import com.example.demo.core.sender.MobileSender;
-import com.example.demo.sender.custom.CustomMobileSender;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.aop.AopInvocationException;
@@ -43,7 +42,6 @@ public class CustomDynamicServiceInterceptor implements MethodInterceptor, Seria
                         String fullName = clz.getName() + suffix;
                         Class<?> clazz = Class.forName(fullName);
                         Object instance = ClassUtils.newInstance(clazz);
-                        //CustomMobileSender sender = new CustomMobileSender();
                         Method[] methods = instance.getClass().getDeclaredMethods();
                         Method method = mi.getMethod();
 
