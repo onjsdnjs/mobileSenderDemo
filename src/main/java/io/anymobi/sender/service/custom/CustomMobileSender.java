@@ -1,4 +1,4 @@
-package io.anymobi.sender.sender.custom;
+package io.anymobi.sender.service.custom;
 
 public interface CustomMobileSender{
 

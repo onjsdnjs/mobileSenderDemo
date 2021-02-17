@@ -2,9 +2,9 @@ package io.anymobi.sender.controller;
 
 //import com.example.demo.sender.AnnotatedMobileSender;
 import io.anymobi.sender.dto.*;
-import io.anymobi.sender.sender.KakaoMobileSender;
-import io.anymobi.sender.sender.KtMobileSender;
-import io.anymobi.sender.sender.NaverMobileSender;
+import io.anymobi.sender.service.KakaoMobileSender;
+import io.anymobi.sender.service.KtMobileSender;
+import io.anymobi.sender.service.NaverMobileSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
