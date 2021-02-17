@@ -33,7 +33,7 @@ public class CustomMobileSenderInterceptor implements MethodInterceptor, Seriali
                 }
             }
 
-            return null;
+            throw e;
         }
     }
 }
