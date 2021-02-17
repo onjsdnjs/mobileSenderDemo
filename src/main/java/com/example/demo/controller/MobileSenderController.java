@@ -29,16 +29,21 @@ public class MobileSenderController {
     @PostConstruct
     public void mobileSend() {
 
-        System.out.println("=========================================");
+        System.out.println("================== Custom MobileSender =========================================");
 
         String sendCount = naverMobileSender.sendCount();
-        System.out.println(sendCount);
+        System.out.println("CustomMobileSender : " +  sendCount);
 
         List<String> serverNames = kakaoMobileSender.getServerNames();
-        System.out.println(serverNames);
+        System.out.println("MicroServiceMobileSender : " +  serverNames);
 
-        System.out.println("=========================================");
-        /*
+        ktMobileSender.sendCount();
+        ktMobileSender.getServerNames();
+        System.out.println("CustomMobileSender & MicroServiceMobileSender : " +  sendCount + ", " + serverNames);
+        System.out.println("");
+
+        System.out.println("================== Default MobileSender =========================================");
+
         kakaoMobileSender.send(new KakaoMobileRequest());
         KakaoMobileResponse receive1 = kakaoMobileSender.receive(new KakaoMobileResponse(3L));
         System.out.println("receive.getId: " + receive1.getId());
@@ -52,7 +57,7 @@ public class MobileSenderController {
         ktMobileSender.send(new KtMobileRequest());
         KtMobileResponse receive3 = ktMobileSender.receive(new KtMobileResponse(5L));
         System.out.println("receive.getId: " + receive3.getId());
-        System.out.println("=========================================");*/
+        System.out.println("=========================================");
 
        /* annotatedMobileSender.send(new KakaoMobileRequest());
         AnnotatedMobileSender receive1 = annotatedMobileSender.receive(new KakaoMobileResponse(3L));
