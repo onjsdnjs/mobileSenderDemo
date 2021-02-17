@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @Controller
 public class MobileSenderController {
@@ -30,14 +31,20 @@ public class MobileSenderController {
 
         System.out.println("=========================================");
 
-       /* kakaoMobileSender.send(new KakaoMobileRequest());
+        String sendCount = naverMobileSender.sendCount();
+        System.out.println(sendCount);
+
+        List<String> serverNames = kakaoMobileSender.getServerNames();
+        System.out.println(serverNames);
+
+        System.out.println("=========================================");
+        /*
+        kakaoMobileSender.send(new KakaoMobileRequest());
         KakaoMobileResponse receive1 = kakaoMobileSender.receive(new KakaoMobileResponse(3L));
         System.out.println("receive.getId: " + receive1.getId());
         System.out.println("");
-*/
-        String sendCount = naverMobileSender.sendCount();
-        System.out.println(sendCount);
-        /*naverMobileSender.send(new NaverMobileRequest());
+
+        naverMobileSender.send(new NaverMobileRequest());
         NaverMobileResponse receive2 = naverMobileSender.receive(new NaverMobileResponse(4L));
         System.out.println("receive.getId: " + receive2.getId());
         System.out.println("");

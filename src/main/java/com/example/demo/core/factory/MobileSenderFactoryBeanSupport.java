@@ -59,7 +59,7 @@ public class MobileSenderFactoryBeanSupport<E extends MobileSender<REQ,RES>,REQ,
         result.setTarget(target);
         result.setInterfaces(mobileSenderInterface, Sender.class, TransactionalProxy.class);
 
-        result.addAdvice(new CustomMobileSenderInterceptor());
+        result.addAdvice(new CustomMobileSenderInterceptor(result, mobileSenderInterface));
         result.addAdvisor(ExposeInvocationInterceptor.ADVISOR);
         result.addAdvice(new TransactionInterceptor());
         result.addAdvice(new DefaultMethodInvokingMethodInterceptor());

@@ -1,14 +1,27 @@
 package com.example.demo.core.interceptor;
 
-import com.example.demo.core.sender.CustomMobileSender;
+import com.example.demo.core.sender.MobileSender;
+import com.example.demo.sender.custom.CustomMobileSender;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.aop.AopInvocationException;
+import org.springframework.aop.framework.ProxyFactory;
+import org.springframework.objenesis.instantiator.util.ClassUtils;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
 
 public class CustomMobileSenderInterceptor implements MethodInterceptor, Serializable {
+
+    private ProxyFactory advised;
+    private Class<?> mobileSenderInterface;
+    private String suffix = "Impl";
+
+    public <E> CustomMobileSenderInterceptor(ProxyFactory advised, Class<?> mobileSenderInterface) {
+
+        this.advised = advised;
+        this.mobileSenderInterface = mobileSenderInterface;
+    }
 
     @Override
     public Object invoke(MethodInvocation mi) throws Throwable {
@@ -20,15 +33,26 @@ public class CustomMobileSenderInterceptor implements MethodInterceptor, Seriali
 
             if (e instanceof AopInvocationException) {
 
-                CustomMobileSender sender = new CustomMobileSender();
-                Method[] methods = sender.getClass().getDeclaredMethods();
-                Method method = mi.getMethod();
+                Class<?>[] interfaces = mobileSenderInterface.getInterfaces();
 
-                for (Method m : methods) {
-                    if (m.getName().equals(method.getName())){
-                        Object[] arguments = mi.getArguments();
-                        m.setAccessible(true);
-                        return m.invoke(sender, arguments);
+                for (Class clz : interfaces) {
+
+                    if (!clz.isAssignableFrom(MobileSender.class)) {
+
+                        String fullName = clz.getName() + suffix;
+                        Class<?> clazz = Class.forName(fullName);
+                        Object instance = ClassUtils.newInstance(clazz);
+                        //CustomMobileSender sender = new CustomMobileSender();
+                        Method[] methods = instance.getClass().getDeclaredMethods();
+                        Method method = mi.getMethod();
+
+                        for (Method m : methods) {
+                            if (m.getName().equals(method.getName())) {
+                                Object[] arguments = mi.getArguments();
+                                m.setAccessible(true);
+                                return m.invoke(instance, arguments);
+                            }
+                        }
                     }
                 }
             }

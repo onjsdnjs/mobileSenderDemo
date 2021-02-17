@@ -1,11 +1,9 @@
-package com.example.demo.core.sender;
+package com.example.demo.sender.custom;
 
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(readOnly = true)
-public class CustomMobileSender<REQ, RES>{
-
-    RES R;
+public class CustomMobileSenderImpl{
 
     String sendCount(){
         return "custom Mobile Sender Test";
