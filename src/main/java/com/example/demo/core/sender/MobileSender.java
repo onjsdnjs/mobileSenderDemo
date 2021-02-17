@@ -1,8 +1,8 @@
 package com.example.demo.core.sender;
 
-import org.springframework.stereotype.Indexed;
+import com.example.demo.core.config.annotation.NoMobileSenderBean;
 
-@Indexed
+@NoMobileSenderBean
 public interface MobileSender<REQ, RES> extends CrudSender<REQ, RES> {
 
     void send(REQ req);

@@ -2,7 +2,7 @@ package com.example.demo.core.config.builder;
 
 import com.example.demo.core.config.annotation.MobileSenderDefinition;
 import com.example.demo.core.config.annotation.NoMobileSenderBean;
-import com.example.demo.core.sender.MobileSender;
+import com.example.demo.core.sender.Sender;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
@@ -34,7 +34,7 @@ public class MobileSenderComponentProvider extends ClassPathScanningCandidateCom
                 addIncludeFilter(filter);
             }
         } else {
-            super.addIncludeFilter(new InterfaceTypeFilter(MobileSender.class));
+            super.addIncludeFilter(new InterfaceTypeFilter(Sender.class));
             super.addIncludeFilter(new AnnotationTypeFilter(MobileSenderDefinition.class, true, true));
         }
 
@@ -65,6 +65,6 @@ public class MobileSenderComponentProvider extends ClassPathScanningCandidateCom
     }
 
     public static boolean isGenericMobileSenderInterface(@Nullable String interfaceName) {
-        return MobileSender.class.getName().equals(interfaceName);
+        return Sender.class.getName().equals(interfaceName);
     }
 }
