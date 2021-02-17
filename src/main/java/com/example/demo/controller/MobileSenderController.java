@@ -29,20 +29,21 @@ public class MobileSenderController {
     @PostConstruct
     public void mobileSend() {
 
-        System.out.println("================== Custom MobileSender =========================================");
+        System.out.println("============================== Custom MobileSender =========================================");
 
         int sendCount1 = naverMobileSender.sendCount();
         System.out.println("CustomMobileSender : " +  sendCount1);
 
         List<String> serverNames1 = kakaoMobileSender.getServerNames("128.162.20.1");
         System.out.println("MicroServiceMobileSender : " +  serverNames1);
+        System.out.println("");
 
         int sendCount2 = ktMobileSender.sendCount();
         List<String> serverNames2 = ktMobileSender.getServerNames("192.163.51.3");
         System.out.println("CustomMobileSender & MicroServiceMobileSender : " +  sendCount2 + ", " + serverNames2);
         System.out.println("");
 
-        System.out.println("================== Default MobileSender =========================================");
+        System.out.println("============================== Default MobileSender =========================================");
 
         kakaoMobileSender.send(new KakaoMobileRequest());
         KakaoMobileResponse receive1 = kakaoMobileSender.receive(new KakaoMobileResponse(3L));
