@@ -33,30 +33,34 @@ public class CustomDynamicServiceInterceptor implements MethodInterceptor, Seria
 
             if (e instanceof AopInvocationException) {
 
-                Class<?>[] interfaces = mobileSenderInterface.getInterfaces();
+                try {
+                    Class<?>[] interfaces = mobileSenderInterface.getInterfaces();
 
-                for (Class clz : interfaces) {
+                    for (Class clz : interfaces) {
 
-                    if (!clz.isAssignableFrom(MobileSender.class)) {
+                        if (!clz.isAssignableFrom(MobileSender.class)) {
 
-                        String fullName = clz.getName() + suffix;
-                        Class<?> clazz = Class.forName(fullName);
-                        Object instance = ClassUtils.newInstance(clazz);
-                        Method[] methods = instance.getClass().getDeclaredMethods();
-                        Method method = mi.getMethod();
+                            String fullName = clz.getName() + suffix;
+                            Class<?> clazz = Class.forName(fullName);
+                            Object instance = ClassUtils.newInstance(clazz);
+                            Method[] methods = instance.getClass().getDeclaredMethods();
+                            Method method = mi.getMethod();
 
-                        for (Method m : methods) {
-                            if (m.getName().equals(method.getName())) {
-                                Object[] arguments = mi.getArguments();
-                                m.setAccessible(true);
-                                return m.invoke(instance, arguments);
+                            for (Method m : methods) {
+                                if (m.getName().equals(method.getName())) {
+                                    Object[] arguments = mi.getArguments();
+                                    m.setAccessible(true);
+                                    return m.invoke(instance, arguments);
+                                }
                             }
                         }
                     }
+                } catch(Exception ex){
+                    throw new CustomMethodInvokeException(e);
                 }
             }
 
-            throw new CustomMethodInvokeException(e);
+            throw e;
         }
     }
 }
