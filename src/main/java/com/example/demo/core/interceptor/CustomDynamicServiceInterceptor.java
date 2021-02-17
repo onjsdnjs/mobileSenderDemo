@@ -1,7 +1,6 @@
 package com.example.demo.core.interceptor;
 
 import com.example.demo.core.sender.MobileSender;
-import com.example.demo.sender.custom.CustomMobileSender;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.aop.AopInvocationException;
@@ -11,13 +10,13 @@ import org.springframework.objenesis.instantiator.util.ClassUtils;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 
-public class CustomMobileSenderInterceptor implements MethodInterceptor, Serializable {
+public class CustomDynamicServiceInterceptor implements MethodInterceptor, Serializable {
 
     private ProxyFactory advised;
     private Class<?> mobileSenderInterface;
     private String suffix = "Impl";
 
-    public <E> CustomMobileSenderInterceptor(ProxyFactory advised, Class<?> mobileSenderInterface) {
+    public <E> CustomDynamicServiceInterceptor(ProxyFactory advised, Class<?> mobileSenderInterface) {
 
         this.advised = advised;
         this.mobileSenderInterface = mobileSenderInterface;
@@ -42,7 +41,6 @@ public class CustomMobileSenderInterceptor implements MethodInterceptor, Seriali
                         String fullName = clz.getName() + suffix;
                         Class<?> clazz = Class.forName(fullName);
                         Object instance = ClassUtils.newInstance(clazz);
-                        //CustomMobileSender sender = new CustomMobileSender();
                         Method[] methods = instance.getClass().getDeclaredMethods();
                         Method method = mi.getMethod();
 

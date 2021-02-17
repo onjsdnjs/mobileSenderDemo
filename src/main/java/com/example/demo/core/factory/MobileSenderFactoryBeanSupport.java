@@ -1,6 +1,6 @@
 package com.example.demo.core.factory;
 
-import com.example.demo.core.interceptor.CustomMobileSenderInterceptor;
+import com.example.demo.core.interceptor.CustomDynamicServiceInterceptor;
 import com.example.demo.core.sender.MobileSender;
 import com.example.demo.core.sender.Sender;
 import com.example.demo.core.sender.SimpleMobileSender;
@@ -59,7 +59,7 @@ public class MobileSenderFactoryBeanSupport<E extends MobileSender<REQ,RES>,REQ,
         result.setTarget(target);
         result.setInterfaces(mobileSenderInterface, Sender.class, TransactionalProxy.class);
 
-        result.addAdvice(new CustomMobileSenderInterceptor(result, mobileSenderInterface));
+        result.addAdvice(new CustomDynamicServiceInterceptor(result, mobileSenderInterface));
         result.addAdvisor(ExposeInvocationInterceptor.ADVISOR);
         result.addAdvice(new TransactionInterceptor());
         result.addAdvice(new DefaultMethodInvokingMethodInterceptor());
