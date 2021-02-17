@@ -30,12 +30,14 @@ public class MobileSenderController {
 
         System.out.println("=========================================");
 
-        kakaoMobileSender.send(new KakaoMobileRequest());
+       /* kakaoMobileSender.send(new KakaoMobileRequest());
         KakaoMobileResponse receive1 = kakaoMobileSender.receive(new KakaoMobileResponse(3L));
         System.out.println("receive.getId: " + receive1.getId());
         System.out.println("");
-
-        naverMobileSender.send(new NaverMobileRequest());
+*/
+        String sendCount = naverMobileSender.sendCount();
+        System.out.println(sendCount);
+        /*naverMobileSender.send(new NaverMobileRequest());
         NaverMobileResponse receive2 = naverMobileSender.receive(new NaverMobileResponse(4L));
         System.out.println("receive.getId: " + receive2.getId());
         System.out.println("");
@@ -43,7 +45,7 @@ public class MobileSenderController {
         ktMobileSender.send(new KtMobileRequest());
         KtMobileResponse receive3 = ktMobileSender.receive(new KtMobileResponse(5L));
         System.out.println("receive.getId: " + receive3.getId());
-        System.out.println("=========================================");
+        System.out.println("=========================================");*/
 
        /* annotatedMobileSender.send(new KakaoMobileRequest());
         AnnotatedMobileSender receive1 = annotatedMobileSender.receive(new KakaoMobileResponse(3L));
