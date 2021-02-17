@@ -7,8 +7,4 @@ public class NotFoundCustomMethodException extends AopInvocationException {
     public NotFoundCustomMethodException(Throwable e) {
         super(e.getMessage());
     }
-
-    public NotFoundCustomMethodException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
 }
