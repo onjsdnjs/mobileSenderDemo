@@ -59,7 +59,6 @@ public class CustomDynamicServiceInterceptor implements MethodInterceptor, Seria
                     throw new CustomMethodInvokeException(e);
                 }
             }
-
             throw e;
         }
     }
