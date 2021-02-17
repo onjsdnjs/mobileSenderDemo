@@ -1,4 +1,4 @@
-## 1. Spring Data Jpa 와 같이 인터페이스만으로 API 가 가능한 모듈 개발
+## Spring Data Jpa 와 같이 인터페이스만으로 API 가 가능한 모듈 개발
 ### 1.1. 기본 인터페이스 기능
 * 기본적으로 제공되는 인터페이스를 상속해서 모든 API를 사용함
 * SomeInterface extends MobileSender
