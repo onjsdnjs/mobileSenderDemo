@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.interceptor.ExposeInvocationInterceptor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor;
 import org.springframework.data.util.Lazy;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 
 @Component
 @NoArgsConstructor
-public class MobileSenderFactoryBeanSupport<E extends MobileSender<REQ,RES>,REQ,RES> implements FactoryBean<E>{
+public class MobileSenderFactoryBeanSupport<E extends MobileSender<REQ,RES>,REQ,RES> implements FactoryBean<E> {
 
     private Class<? extends E> mobileSenderInterface;
 

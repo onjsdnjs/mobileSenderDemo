@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 @Indexed
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Inherited
 public @interface MobileSenderDefinition {
 }
